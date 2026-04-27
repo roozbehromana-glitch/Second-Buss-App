@@ -1,0 +1,35 @@
+:root {
+  --bg: #f5f7fb;
+  --sidebar: #0f2d4d;
+  --accent: #1f7a8c;
+  --ok: #2a9d8f;
+  --warn: #e76f51;
+  --text: #1d2a3a;
+}
+
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { margin: 0; display: flex; background: var(--bg); color: var(--text); }
+.sidebar { width: 240px; min-height: 100vh; background: var(--sidebar); color: #fff; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.sidebar button { background: #fff1; color: #fff; border: 1px solid #ffffff33; padding: 10px; border-radius: 8px; cursor: pointer; text-align: left; }
+main { flex: 1; padding: 18px; }
+header { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 4px #0001; }
+.panel { display: none; background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 1px 4px #0001; margin-bottom: 16px; }
+.panel.active { display: block; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.card-grid button, #addNodeBtn, #addEdgeBtn, #generateVisualBtn { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 12px; cursor: pointer; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+input, select { width: 100%; padding: 8px; margin: 4px 0; }
+#networkSummary { background: #f0f4f8; padding: 10px; border-radius: 8px; min-height: 90px; }
+.form-grid { display: grid; grid-template-columns: repeat(3, minmax(160px, 1fr)); gap: 10px; }
+.form-grid label { display: block; font-size: 12px; font-weight: bold; }
+.form-grid input, .form-grid select { margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #dce5ee; padding: 8px; text-align: left; }
+.result { background: #eef7ff; padding: 12px; border-radius: 8px; }
+#aiImage { max-width: 100%; margin-top: 12px; border-radius: 8px; display: none; border: 1px solid #dce5ee; }
+.file-label { display: block; margin-top: 10px; }
+@media (max-width: 900px) {
+  body { flex-direction: column; }
+  .sidebar { width: 100%; min-height: auto; }
+  .two-col, .form-grid { grid-template-columns: 1fr; }
+}
