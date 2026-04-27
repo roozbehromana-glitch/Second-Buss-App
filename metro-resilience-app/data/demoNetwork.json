@@ -1,0 +1,34 @@
+{
+  "name": "Demo Metro Backbone (Bucharest-like reduced)",
+  "nodes": [
+    { "id": "N1", "name": "North Hub", "type": "terminal", "line": "M1" },
+    { "id": "N2", "name": "Aviatorilor", "type": "normal", "line": "M1" },
+    { "id": "N3", "name": "Piata Victoriei", "type": "transfer", "line": "M1/M2", "critical": true },
+    { "id": "N4", "name": "Gara de Nord", "type": "transfer", "line": "M1/M4", "critical": true },
+    { "id": "N5", "name": "Eroilor", "type": "transfer", "line": "M1/M3", "critical": true },
+    { "id": "N6", "name": "Unirii", "type": "transfer", "line": "M1/M2/M3", "critical": true },
+    { "id": "N7", "name": "Tineretului", "type": "normal", "line": "M2" },
+    { "id": "N8", "name": "Berceni", "type": "terminal", "line": "M2" },
+    { "id": "N9", "name": "Crangasi", "type": "normal", "line": "M1" },
+    { "id": "N10", "name": "Dristor", "type": "transfer", "line": "M1/M3", "critical": true },
+    { "id": "N11", "name": "Nicolae Grigorescu", "type": "transfer", "line": "M1/M3", "critical": true },
+    { "id": "N12", "name": "Preciziei", "type": "terminal", "line": "M3" },
+    { "id": "N13", "name": "Anghel Saligny", "type": "terminal", "line": "M3" }
+  ],
+  "edges": [
+    { "source": "N1", "target": "N2", "line": "M1" },
+    { "source": "N2", "target": "N3", "line": "M1" },
+    { "source": "N3", "target": "N4", "line": "M1" },
+    { "source": "N4", "target": "N5", "line": "M1" },
+    { "source": "N5", "target": "N6", "line": "M1" },
+    { "source": "N6", "target": "N10", "line": "M1" },
+    { "source": "N10", "target": "N11", "line": "M1" },
+    { "source": "N3", "target": "N7", "line": "M2" },
+    { "source": "N7", "target": "N8", "line": "M2" },
+    { "source": "N5", "target": "N12", "line": "M3" },
+    { "source": "N12", "target": "N6", "line": "M3" },
+    { "source": "N6", "target": "N11", "line": "M3" },
+    { "source": "N11", "target": "N13", "line": "M3" },
+    { "source": "N4", "target": "N9", "line": "M1" }
+  ]
+}

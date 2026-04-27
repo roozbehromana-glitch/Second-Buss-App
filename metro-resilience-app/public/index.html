@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metro Robustness and Resilience Decision-Support Tool</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <h2>Metro Tool</h2>
+      <button data-section="dashboard">Dashboard</button>
+      <button data-section="network">Network Builder</button>
+      <button data-section="disruption">Disruption Scenario</button>
+      <button data-section="robustness">Robustness Analysis</button>
+      <button data-section="resilience">Resilience Analysis</button>
+      <button data-section="bridging">Bus-Bridging Recommendation</button>
+      <button data-section="ai">AI Visual Preview</button>
+      <button data-section="export">Export Report</button>
+    </aside>
+
+    <main>
+      <header>
+        <h1>Metro Robustness and Resilience Decision-Support Tool</h1>
+        <p>Upload or create a metro graph, define disruptions, and compare resilience-focused response scenarios.</p>
+      </header>
+
+      <section id="dashboard" class="panel active">
+        <div class="card-grid">
+          <button id="btnCreateNetwork">Create Network</button>
+          <button id="btnLoadDemo">Upload Network (Demo)</button>
+          <button id="btnDefineDisruption">Define Disruption</button>
+          <button id="btnRunAnalysis">Run Analysis</button>
+          <button id="btnViewRecommendation">View Recommendations</button>
+        </div>
+      </section>
+
+      <section id="network" class="panel">
+        <h3>Network Builder</h3>
+        <div class="two-col">
+          <div>
+            <h4>Nodes</h4>
+            <input id="nodeId" placeholder="ID" />
+            <input id="nodeName" placeholder="Station name" />
+            <select id="nodeType"><option>normal</option><option>terminal</option><option>transfer</option><option>critical</option></select>
+            <input id="nodeLine" placeholder="Line" />
+            <button id="addNodeBtn">Add Node</button>
+          </div>
+          <div>
+            <h4>Edges</h4>
+            <input id="edgeSource" placeholder="Source ID" />
+            <input id="edgeTarget" placeholder="Target ID" />
+            <input id="edgeLine" placeholder="Line" />
+            <button id="addEdgeBtn">Add Edge</button>
+          </div>
+        </div>
+        <label class="file-label">Upload JSON/CSV <input type="file" id="networkFile" accept=".json,.csv" /></label>
+        <pre id="networkSummary"></pre>
+      </section>
+
+      <section id="disruption" class="panel">
+        <h3>Disruption Scenario</h3>
+        <div class="form-grid" id="scenarioForm"></div>
+      </section>
+
+      <section id="robustness" class="panel">
+        <h3>Structural Robustness</h3>
+        <canvas id="robustnessChart"></canvas>
+        <table id="robustnessTable"></table>
+      </section>
+
+      <section id="resilience" class="panel">
+        <h3>Operational Resilience</h3>
+        <canvas id="resilienceChart"></canvas>
+        <table id="resilienceTable"></table>
+      </section>
+
+      <section id="bridging" class="panel">
+        <h3>Bus-Bridging Recommendation</h3>
+        <div id="bridgingResult" class="result"></div>
+      </section>
+
+      <section id="ai" class="panel">
+        <h3>AI Visual Preview</h3>
+        <button id="generateVisualBtn">Generate Visual Explanation</button>
+        <p id="aiMessage"></p>
+        <img id="aiImage" alt="Generated scenario visual" />
+      </section>
+
+      <section id="export" class="panel">
+        <h3>Export Report</h3>
+        <div class="card-grid">
+          <button id="exportRobustnessCsv">Export Robustness CSV</button>
+          <button id="exportResilienceCsv">Export Resilience CSV</button>
+          <button id="exportScenarioJson">Export Scenario JSON</button>
+          <button id="exportChartsPng">Export Chart PNGs</button>
+          <button id="exportReportHtml">Export Summary HTML</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/network.js"></script>
+    <script src="/js/robustness.js"></script>
+    <script src="/js/resilience.js"></script>
+    <script src="/js/bridging.js"></script>
+    <script src="/js/charts.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
