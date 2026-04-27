@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metro Robustness and Resilience Decision-Support Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="layout">
+      <aside class="sidebar glass">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div>
+            <h2>Metro Resilience</h2>
+            <p>Decision Support</p>
+          </div>
+        </div>
+
+        <nav class="nav-links">
+          <button data-section="dashboard" class="nav-btn active">Dashboard</button>
+          <button data-section="network" class="nav-btn">Network Builder</button>
+          <button data-section="disruption" class="nav-btn">Disruption Scenario</button>
+          <button data-section="robustness" class="nav-btn">Robustness Analysis</button>
+          <button data-section="resilience" class="nav-btn">Resilience Analysis</button>
+          <button data-section="bridging" class="nav-btn">Bus-Bridging Recommendation</button>
+          <button data-section="ai" class="nav-btn">AI Visual Preview</button>
+          <button data-section="export" class="nav-btn">Export Report</button>
+        </nav>
+
+        <div class="sidebar-footer glass-soft">
+          <p>Model scope</p>
+          <strong>Graph + Operations</strong>
+          <span>Structural robustness, Q(t), R(T), and bridging optimization.</span>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar glass">
+          <div>
+            <h1>Metro Robustness and Resilience Decision-Support Tool</h1>
+            <p>Model disruptions, compare operational scenarios, and support intervention decisions.</p>
+          </div>
+          <button id="btnRunAnalysis" class="primary">Run Full Analysis</button>
+        </header>
+
+        <section id="dashboard" class="panel active glass">
+          <div class="card-grid">
+            <button id="btnCreateNetwork" class="metric-card">
+              <span>Create Network</span>
+              <small>Build graph nodes and links manually.</small>
+            </button>
+            <button id="btnLoadDemo" class="metric-card">
+              <span>Upload Network</span>
+              <small>Load demo or import custom CSV/JSON.</small>
+            </button>
+            <button id="btnDefineDisruption" class="metric-card">
+              <span>Define Disruption</span>
+              <small>Set station/link failure and demand profile.</small>
+            </button>
+            <button id="btnViewRecommendation" class="metric-card">
+              <span>View Recommendations</span>
+              <small>Inspect best bus-bridging strategy.</small>
+            </button>
+          </div>
+        </section>
+
+        <section id="network" class="panel glass">
+          <div class="section-title">
+            <h3>Network Builder</h3>
+            <p>Add stations, links, and import files. Transfer and critical nodes are highlighted in analysis.</p>
+          </div>
+          <div class="two-col">
+            <div class="input-card glass-soft">
+              <h4>Nodes</h4>
+              <input id="nodeId" placeholder="ID" />
+              <input id="nodeName" placeholder="Station name" />
+              <select id="nodeType"><option>normal</option><option>terminal</option><option>transfer</option><option>critical</option></select>
+              <input id="nodeLine" placeholder="Line" />
+              <button id="addNodeBtn" class="primary">Add Node</button>
+            </div>
+            <div class="input-card glass-soft">
+              <h4>Edges</h4>
+              <input id="edgeSource" placeholder="Source ID" />
+              <input id="edgeTarget" placeholder="Target ID" />
+              <input id="edgeLine" placeholder="Line" />
+              <button id="addEdgeBtn" class="primary">Add Edge</button>
+            </div>
+          </div>
+          <label class="file-label glass-soft">Upload JSON/CSV <input type="file" id="networkFile" accept=".json,.csv" /></label>
+          <pre id="networkSummary"></pre>
+        </section>
+
+        <section id="disruption" class="panel glass">
+          <div class="section-title">
+            <h3>Disruption Scenario</h3>
+            <p>Configure failure timing, headways, demand, and replacement fleet constraints.</p>
+          </div>
+          <div class="form-grid" id="scenarioForm"></div>
+        </section>
+
+        <section id="robustness" class="panel glass">
+          <div class="section-title">
+            <h3>Structural Robustness</h3>
+            <p>Random and targeted removal curves with f90% and collapse threshold.</p>
+          </div>
+          <canvas id="robustnessChart"></canvas>
+          <table id="robustnessTable"></table>
+        </section>
+
+        <section id="resilience" class="panel glass">
+          <div class="section-title">
+            <h3>Operational Resilience</h3>
+            <p>Q(t), MHD, SAR, and SRI evolution under disruption and recovery phases.</p>
+          </div>
+          <canvas id="resilienceChart"></canvas>
+          <table id="resilienceTable"></table>
+        </section>
+
+        <section id="bridging" class="panel glass">
+          <div class="section-title">
+            <h3>Bus-Bridging Recommendation</h3>
+            <p>Rule + score-based strategy selection for scenarios A–E.</p>
+          </div>
+          <div id="bridgingResult" class="result"></div>
+        </section>
+
+        <section id="ai" class="panel glass">
+          <div class="section-title">
+            <h3>AI Visual Preview</h3>
+            <p>Generate disruption and response diagrams using Gemini image preview.</p>
+          </div>
+          <button id="generateVisualBtn" class="primary">Generate Visual Explanation</button>
+          <p id="aiMessage"></p>
+          <img id="aiImage" alt="Generated scenario visual" />
+        </section>
+
+        <section id="export" class="panel glass">
+          <div class="section-title">
+            <h3>Export Report</h3>
+            <p>Download metrics, charts, and the analysis summary for reporting.</p>
+          </div>
+          <div class="card-grid">
+            <button id="exportRobustnessCsv" class="metric-card"><span>Export Robustness CSV</span></button>
+            <button id="exportResilienceCsv" class="metric-card"><span>Export Resilience CSV</span></button>
+            <button id="exportScenarioJson" class="metric-card"><span>Export Scenario JSON</span></button>
+            <button id="exportChartsPng" class="metric-card"><span>Export Chart PNGs</span></button>
+            <button id="exportReportHtml" class="metric-card"><span>Export Summary HTML</span></button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/js/network.js"></script>
+    <script src="/js/robustness.js"></script>
+    <script src="/js/resilience.js"></script>
+    <script src="/js/bridging.js"></script>
+    <script src="/js/charts.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
